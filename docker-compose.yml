@@ -1,0 +1,19 @@
+version: '2'
+
+services:
+  mysql:
+    image: islandoracollabgroup/isle-mysql:latest
+    container_name: isle-mysql
+    environment:
+      - MYSQL_ROOT_PASSWORD=password321  # default.
+    networks:
+      isle-static:
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/mysql/data:/var/lib/mysql
+
+# Defined networks
+networks:
+  isle-static:
+    external: true

@@ -1,0 +1,53 @@
+version: '2'
+
+### Step-by-step. 
+# LOGIN DATA:
+# For Tomcats:  admin:password 
+# For Fedora:  fedoraAdmin:ild_fed_admin_2018
+
+services:
+  fedora:
+    image: islandoracollabgroup/isle-fedora:latest
+    # container_name: isle-fedora
+    networks:
+      isle-static:
+      isle-internal:
+        aliases:
+          - fedora
+    ports:
+      - "8082:8080"
+    tty: true
+    volumes:
+      ## Testing FGS Configuration in (hack all the files in here):
+      - ./config-set/fgsconfigFinal:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal
+      # Logs out for debug later (doesn't change.)
+      - ./logs/fedora:/usr/local/fedora/server/logs
+      ## Simplifying the tomcat password  (doesn't change.)
+      - ../config/tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml 
+      ## Repository Data to Churn (doesn't change.)
+      - /mnt/barnard/islandora/fedora/data/datastreamStore:/usr/local/fedora/data/datastreamStore:ro
+      - /mnt/barnard/islandora/fedora/data/objectStore:/usr/local/fedora/data/objectStore
+
+  solr:
+    image: islandoracollabgroup/isle-solr:latest
+    # container_name: isle-solr
+    networks:
+      isle-internal:
+        aliases:
+          - solr
+    ports:
+      - "8083:8080"
+    tty: true
+    volumes:
+      ## Testing Solr configuration in (hack all the files in here):
+      - ./config-set/collection1:/usr/local/solr/collection1
+      ## Simplifying the tomcat password  (doesn't change.)
+      - ../config/tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml 
+      # Logs out for debug later (doesn't change.)
+      - ./logs/solr:/usr/local/tomcat/logs
+
+# Defined networks
+networks:
+  isle-static:
+    external: true
+  isle-internal:
