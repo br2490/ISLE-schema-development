@@ -3,8 +3,8 @@
 <xsl:stylesheet version="1.0" exclude-result-prefixes="exts" xmlns:audit="info:fedora/fedora-system:def/audit#" xmlns:xsl="http://www.w3.org/1999/XSL/Transform" xmlns:exts="xalan://dk.defxws.fedoragsearch.server.GenericOperationsImpl" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:dtu_meta="http://www.dtu.dk/dtu_meta/" xmlns:foxml="info:fedora/fedora-system:def/foxml#" xmlns:oai_dc="http://www.openarchives.org/OAI/2.0/oai_dc/" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:meta="http://www.dtu.dk/dtu_meta/meta/">
 <xsl:output method="xml" indent="yes" encoding="UTF-8"/>
 <xsl:param name="REPOSITORYNAME" select="'FgsRepos'"/>
-<xsl:param name="REPOSBASEURL" select="'http://localhost:8080/fedora'"/>
-<xsl:param name="FEDORASOAP" select="'http://localhost:8080/fedora/services'"/>
+<xsl:param name="REPOSBASEURL" select="'http://fedora:8080/fedora'"/>
+<xsl:param name="FEDORASOAP" select="'http://fedora:8080/fedora/services'"/>
 <xsl:param name="FEDORAUSER" select="'fedoraAdmin'"/>
 <xsl:param name="FEDORAPASS" select="'fedoraAdmin'"/>
 <xsl:param name="TRUSTSTOREPATH" select="'trustStorePath'"/>

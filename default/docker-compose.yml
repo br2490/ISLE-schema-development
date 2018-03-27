@@ -25,8 +25,7 @@ services:
       ## Simplifying the tomcat password  (doesn't change.)
       - ../config/tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml 
       ## Repository Data to Churn (doesn't change.)
-      - /mnt/barnard/islandora/fedora/data/datastreamStore:/usr/local/fedora/data/datastreamStore:ro
-      - /mnt/barnard/islandora/fedora/data/objectStore:/usr/local/fedora/data/objectStore
+      - /mnt/barnard/islandora/fedora/data:/usr/local/fedora/data/
 
   solr:
     image: islandoracollabgroup/isle-solr:latest

@@ -6,29 +6,26 @@ version: '2'
 # For Fedora:  fedoraAdmin:ild_fed_admin_2018
 
 services:
-  fedora:
+  fedora-dev:
     image: islandoracollabgroup/isle-fedora:latest
     # container_name: isle-fedora
     networks:
       isle-static:
       isle-internal:
-        aliases:
-          - fedora
     ports:
       - "8082:8080"
     tty: true
     volumes:
       ## Testing FGS Configuration in (hack all the files in here):
       - ./config-set/fgsconfigFinal:/usr/local/tomcat/webapps/fedoragsearch/WEB-INF/classes/fgsconfigFinal
-      # Logs out for debug later (doesn't change.)
-      - ./logs/fedora:/usr/local/fedora/server/logs
+      ## Shutoff fedora.
+      - ./fedora.war:/usr/local/tomcat/webapps/fedora.war
       ## Simplifying the tomcat password  (doesn't change.)
       - ../config/tomcat/tomcat-users.xml:/usr/local/tomcat/conf/tomcat-users.xml 
-      ## Repository Data to Churn (doesn't change.)
-      - /mnt/barnard/islandora/fedora/data/datastreamStore:/usr/local/fedora/data/datastreamStore:ro
-      - /mnt/barnard/islandora/fedora/data/objectStore:/usr/local/fedora/data/objectStore
+      ## Repository Data, READ ONLY. (doesn't change.)
+      - /mnt/barnard/islandora/fedora/data/objectStore:/usr/local/fedora/data/objectStore:ro
 
-  solr:
+  solr-dev:
     image: islandoracollabgroup/isle-solr:latest
     # container_name: isle-solr
     networks:
